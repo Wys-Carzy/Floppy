@@ -1,0 +1,100 @@
+# Copyright (c) 2020, Code Aurora Forum. All rights reserved.
+#
+# add support for spectrum
+import /vendor/etc/init/hw//init.spectrum.rc
+
+on boot
+
+# Set light thermal restrictions while optimizing apps
+# [throttle_freq_LITTLE, throttle_freq_big, throttle_temp, unthrottle_temp]
+    write /sys/kernel/msm_thermal/zone0  "2188800 2342400 50 49"
+    write /sys/kernel/msm_thermal/zone1  "2188800 2342400 51 50"
+    write /sys/kernel/msm_thermal/zone2  "2188800 2342400 52 51"
+    write /sys/kernel/msm_thermal/zone3  "2188800 2342400 53 52"
+    write /sys/kernel/msm_thermal/enabled 1
+ 
+on charger
+
+#Config Simple Thermal driver
+# [throttle_freq_LITTLE, throttle_freq_BIG, throttle_temp, unthrottle_temp]
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/zone0  "2188800 2342400 50 49"
+    write /sys/kernel/msm_thermal/zone1  "2188800 2342400 51 50"
+    write /sys/kernel/msm_thermal/zone2  "2188800 2342400 52 51"
+    write /sys/kernel/msm_thermal/zone3  "2188800 2342400 53 52"
+    write /sys/kernel/msm_thermal/zone4  "2188800 2342400 54 53"
+    write /sys/kernel/msm_thermal/zone5  "2188800 2342400 55 54"
+    write /sys/kernel/msm_thermal/zone5  "2188800 2342400 56 55"
+    write /sys/kernel/msm_thermal/zone6  "2188800 2342400 57 56"
+    write /sys/kernel/msm_thermal/zone6  "2188800 2342400 58 57"
+    write /sys/kernel/msm_thermal/zone7  "2188800 2342400 59 58"
+    write /sys/kernel/msm_thermal/zone8  "1728000 1824000 60 59"
+    write /sys/kernel/msm_thermal/zone9  "1728000 1824000 61 60"
+    write /sys/kernel/msm_thermal/zone10 "1728000 1824000 62 61"
+    write /sys/kernel/msm_thermal/zone11 "1728000 1824000 63 62"
+    write /sys/kernel/msm_thermal/zone12 "1728000 1824000 64 63"
+    write /sys/kernel/msm_thermal/zone13 "1056000 1209600 65 64"
+    write /sys/kernel/msm_thermal/zone14 "1036800 1209600 66 65"
+    write /sys/kernel/msm_thermal/zone15 "1036800 1209600 67 66"
+    write /sys/kernel/msm_thermal/zone16 "844800 806400 68 67"
+    write /sys/kernel/msm_thermal/zone17 "729600 729600 69 68"
+    write /sys/kernel/msm_thermal/zone18 "652800 652800 70 69"
+    write /sys/kernel/msm_thermal/zone19 "556800 556800 71 70"
+    write /sys/kernel/msm_thermal/zone20 "480000 480000 72 71"
+    write /sys/kernel/msm_thermal/zone21 "422400 403200 73 72"
+    write /sys/kernel/msm_thermal/zone22 "307200 307200 74 73"
+    write /sys/kernel/msm_thermal/sampling_ms 1000
+    write /sys/kernel/msm_thermal/enabled 1
+    
+on property:sys.boot_completed=1
+
+#Animation script
+exec u:r:init:s0 root root -- /vendor/etc/init/hw//init.animation.sh
+exec u:r:su:s0 root root -- /vendor/etc/init/hw//init.animation.sh
+
+#Fingerprint unlock with screen off by default
+	write /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup 1
+
+#Config Simple Thermal driver
+# [throttle_freq_LITTLE, throttle_freq_BIG, throttle_temp, unthrottle_temp]
+    write /sys/kernel/msm_thermal/enabled 0
+    write /sys/kernel/msm_thermal/zone0  "2188800 2342400 50 49"
+    write /sys/kernel/msm_thermal/zone1  "2188800 2342400 51 50"
+    write /sys/kernel/msm_thermal/zone2  "2188800 2342400 52 51"
+    write /sys/kernel/msm_thermal/zone3  "2188800 2342400 53 52"
+    write /sys/kernel/msm_thermal/zone4  "2188800 2342400 54 53"
+    write /sys/kernel/msm_thermal/zone5  "2188800 2342400 55 54"
+    write /sys/kernel/msm_thermal/zone5  "2188800 2342400 56 55"
+    write /sys/kernel/msm_thermal/zone6  "2188800 2342400 57 56"
+    write /sys/kernel/msm_thermal/zone6  "2188800 2342400 58 57"
+    write /sys/kernel/msm_thermal/zone7  "2188800 2342400 59 58"
+    write /sys/kernel/msm_thermal/zone8  "1728000 1824000 60 59"
+    write /sys/kernel/msm_thermal/zone9  "1728000 1824000 61 60"
+    write /sys/kernel/msm_thermal/zone10 "1728000 1824000 62 61"
+    write /sys/kernel/msm_thermal/zone11 "1728000 1824000 63 62"
+    write /sys/kernel/msm_thermal/zone12 "1728000 1824000 64 63"
+    write /sys/kernel/msm_thermal/zone13 "1056000 1209600 65 64"
+    write /sys/kernel/msm_thermal/zone14 "1036800 1209600 66 65"
+    write /sys/kernel/msm_thermal/zone15 "1036800 1209600 67 66"
+    write /sys/kernel/msm_thermal/zone16 "844800 806400 68 67"
+    write /sys/kernel/msm_thermal/zone17 "729600 729600 69 68"
+    write /sys/kernel/msm_thermal/zone18 "652800 652800 70 69"
+    write /sys/kernel/msm_thermal/zone19 "556800 556800 71 70"
+    write /sys/kernel/msm_thermal/zone20 "480000 480000 72 71"
+    write /sys/kernel/msm_thermal/zone21 "422400 403200 73 72"
+    write /sys/kernel/msm_thermal/zone22 "307200 307200 74 73"
+    write /sys/kernel/msm_thermal/sampling_ms 1000
+    write /sys/kernel/msm_thermal/enabled 1
+
+#Enable Fingerprint Boost
+    write /sys/kernel/fp_boost/enabled 1
+
+#Underclock
+    write /sys/module/cpufreq/parameters/enable_underclock_balanced N
+    write /sys/module/cpufreq/parameters/enable_underclock_battery N
+
+# Update cpusets now that boot is complete and we want better load balancing
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/foreground/cpus 0-2
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-2
